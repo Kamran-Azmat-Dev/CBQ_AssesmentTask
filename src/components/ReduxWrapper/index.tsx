@@ -3,8 +3,15 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
 import {store, persistor} from '../../redux';
 
-function ReduxWrapper(Component:any) {
-  return function inject(props:any) {
+interface Props {
+  rootTag?: number;
+  initialProps?: {
+    componentId: String;
+  };
+}
+
+function ReduxWrapper(Component: React.ComponentType<any>) {
+  return function inject(props: Props) {
     const EnhancedComponent = () => (
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
